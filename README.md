@@ -14,9 +14,9 @@
 > [!NOTE]
 > Add your project screenshots below to showcase the UI in action.
 
-| Dashboard Overview | Real-time Detection | Intelligence Logs |
+| Detection | Dashboard | Info |
 | :---: | :---: | :---: |
-| ![Main Dashboard](https://raw.githubusercontent.com/placeholder-images/main_ui.png) | ![Detection](https://raw.githubusercontent.com/placeholder-images/detection.png) | ![Logs](https://raw.githubusercontent.com/placeholder-images/logs.png) |
+| ![Detection](![alt text](image.png)) | ![Dashboard](![alt text](image-1.png)) | ![Info](![alt text](image-2.png)) |
 
 ---
 
@@ -91,4 +91,4 @@ This system processes all data **locally**. No video feeds or detection logs are
 We welcome contributions to enhance the tactical capabilities of Aegis. Please feel free to fork the repo and submit PRs!
 
 ---
-*Created with ❤️ by [Your Name](https://github.com/YOUR_USERNAME)*
+*Created with ❤️ by [Vijay Otaradi](https://github.com/Vijay11-08)*
