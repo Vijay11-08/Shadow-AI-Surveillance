@@ -16,7 +16,7 @@
 
 | Detection | Dashboard | Info |
 | :---: | :---: | :---: |
-| ![Detection](![alt text](image.png)) | ![Dashboard](![alt text](image-1.png)) | ![Info](![alt text](image-2.png)) |
+| ![alt text](image.png) | ![alt text](image-1.png) | ![alt text](image-2.png) |
 
 ---
 
