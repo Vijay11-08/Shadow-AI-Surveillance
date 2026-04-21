@@ -1,0 +1,6 @@
+@echo off
+title AI VISION COMMAND CENTER
+echo Starting AI Vision Command Center...
+echo Please wait while the AI Models are initialized...
+python app.py
+pause

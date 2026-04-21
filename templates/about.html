@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT | VISION SENTINEL AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .about-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+        .feature-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+        
+        .run-guide {
+            background: rgba(0, 242, 254, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            margin-top: 2rem;
+        }
+        code { color: var(--primary); background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="bg-blobs">
+        <div class="blob" style="top: 0; left: 0;"></div>
+        <div class="blob" style="bottom: 0; right: 0; animation-delay: -5s;"></div>
+    </div>
+
+    <div class="about-container">
+        <a href="/" class="back-link">← RETURN TO COMMAND CENTER</a>
+        
+        <header style="margin-top: 2rem; margin-bottom: 3rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Vision Sentinel AI</h1>
+            <p style="color: var(--primary); letter-spacing: 2px; font-weight: 600;">PROFESSIONAL AI SURVEILLANCE ECOSYSTEM</p>
+        </header>
+
+        <section>
+            <h2>Application Class</h2>
+            <p style="margin-top: 1rem; color: var(--text-dim); line-height: 1.8;">
+                This is a <strong>High-Performance Open-Vocabulary Object Detection System</strong>. Unlike traditional AI that can only see fixed objects, this application uses a <strong>Semantic Neural Engine (YOLO-World)</strong> that allows users to define new objects to track in real-time without retraining the model. It is designed for laboratory research, classroom monitoring, and intelligent surveillance.
+            </p>
+        </section>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Real-Time Vision</h3>
+                <p>Asynchronous multi-threaded processing ensures a smooth 30+ FPS video stream while performing complex AI reasoning.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Dynamic Vocabulary</h3>
+                <p>Instantly add specialized items like Lab Equipment, Glasses, ID Cards, or custom items via the Command Settings portal.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Data Extraction</h3>
+                <p>Automatically generates intelligence logs and downloadable CSV reports for academic or security documentation.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Tactical UI</h3>
+                <p>High-fidelity glassmorphic dashboard featuring live status badges, vision scanlines, and tactical overlays.</p>
+            </div>
+        </div>
+
+        <section class="run-guide">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1rem;">🚀 Deployment Guide</h2>
+            <ul style="list-style: none; color: var(--text-dim); font-size: 0.9rem;">
+                <li style="margin-bottom: 10px;">1. Ensure Python 3.10+ is installed on the host machine.</li>
+                <li style="margin-bottom: 10px;">2. Install dependencies using <code>pip install -r requirements.txt</code>.</li>
+                <li style="margin-bottom: 10px;">3. Execute the Master Launcher: <code>START_AI.bat</code>.</li>
+                <li style="margin-bottom: 10px;">4. Access the interface via <code>http://127.0.0.1:5000</code>.</li>
+            </ul>
+        </section>
+
+        <footer style="margin-top: 3rem; font-size: 0.8rem; color: rgba(255,255,255,0.2); text-align: center;">
+            VISION SENTINEL SYSTEM &copy; 2026 - POWERED BY YOLO-WORLD v2
+        </footer>
+    </div>
+</body>
+</html>

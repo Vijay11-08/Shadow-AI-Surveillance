@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI COMMAND CENTER | TACTICAL VISION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- About/Documentation Modal -->
+    <div id="about-modal" class="modal-overlay">
+        <div class="about-modal-content">
+            <div class="modal-header">
+                <h2>AI SYSTEM DOCUMENTATION</h2>
+                <span class="close-btn" onclick="toggleAbout()">&times;</span>
+            </div>
+            
+            <div class="about-section">
+                <h2>Application Focus</h2>
+                <p>This is a High-Performance Open-Vocabulary Object Detection System. Built using a Semantic Neural Engine (YOLO-World), it allows users to track specialized items instantly without retraining. Ideal for academic research and intelligent surveillance.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Key Functionalities</h2>
+                <ul style="color: var(--text-dim); line-height: 2; margin-top: 10px; font-size: 0.9rem;">
+                    <li><strong>Real-Time Asynchronous Vision:</strong> Multi-threaded processing for smooth 30+ FPS movement.</li>
+                    <li><strong>Dynamic Intelligence:</strong> Add new objects (Glasses, ID Cards, etc.) on the fly via Command Settings.</li>
+                    <li><strong>Report Generation:</strong> Automated CSV intelligence logs for audit and research.</li>
+                    <li><strong>Glassmorphic Tactical UI:</strong> Professional dark-mode interface with holographic scanlines.</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h2>Deployment Guide</h2>
+                <p>To run this project: Ensure Python 3.10+ is installed, run `pip install -r requirements.txt`, and double-click the `START_AI.bat` master launcher.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>COMMAND SETTINGS</h2>
+                <span class="close-btn" onclick="toggleModal()">&times;</span>
+            </div>
+            
+            <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1rem;">
+                Add new objects to the AI logic using Open-Vocabulary.
+            </p>
+
+            <div class="input-group">
+                <input type="text" id="new-object" placeholder="e.g. coffee mug, red car, helmet...">
+                <button class="btn-add" onclick="addClass()">ADD</button>
+            </div>
+
+            <div class="panel-title">Active AI Vocabulary</div>
+            <div id="modal-tags" class="tag-box" style="margin-top: 10px;">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-shell">
+        <nav class="nav-rail">
+            <div class="nav-icon active" onclick="location.reload()">
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                 <span class="nav-label">Dash</span>
+            </div>
+            <div class="nav-icon" onclick="toggleModal()" title="Settings">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1V15a2 2 0 0 1-2-2 2 2 0 0 1 2-2v-.09A1.65 1.65 0 0 0 3.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span class="nav-label">Set</span>
+            </div>
+            <div class="nav-icon" onclick="toggleAbout()" title="About">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <span class="nav-label">Info</span>
+            </div>
+        </nav>
+
+        <main class="main-stage">
+            <header>
+                <div class="title-box">
+                    <h1>Vision Sentinel</h1>
+                    <div class="system-badges">
+                        <span class="badge">SEC_LEVEL: ALPHA</span>
+                        <span class="badge">HOST: 127.0.0.1</span>
+                    </div>
+                </div>
+                <div class="connection-status">
+                    <span class="pulse-dot"></span>
+                    <span style="color: #00ff00; font-weight: 600; font-size: 0.85rem;">LIVE_ENGINE_ACTIVE</span>
+                </div>
+            </header>
+
+            <div class="feed-container">
+                <div class="tactical-overlay"></div>
+                <div class="scanline"></div>
+                <img id="vision-stream" src="{{ url_for('video_feed') }}">
+            </div>
+
+            <div class="control-bars" style="display: flex; gap: 1rem;">
+                <div class="panel" style="flex: 1;">
+                    <div class="panel-title">System Responsiveness</div>
+                    <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <div style="width: 85%; height: 100%; background: var(--primary); border-radius: 10px; box-shadow: 0 0 10px var(--primary);"></div>
+                    </div>
+                </div>
+                <div class="panel" style="flex: 1;">
+                    <div class="panel-title">AI Engine Status</div>
+                    <div style="color: var(--primary); font-weight: 800; font-size: 1.1rem;">YOLO-WORLD_v2_ACTIVE</div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="data-sidebar">
+            <div class="panel">
+                <div class="panel-title">Live Object Stream</div>
+                <div id="active-detections" class="tag-box"></div>
+            </div>
+
+            <div class="panel" style="flex-grow: 1; display: flex; flex-direction: column;">
+                <div class="panel-title">Detection Intelligence History</div>
+                <div id="log-feed" class="detection-log" style="flex-grow: 1;"></div>
+                <a href="http://127.0.0.1:5000/download_logs" class="download-link">
+                    📥 DOWNLOAD REPORT (.CSV)
+                </a>
+            </div>
+
+            <!-- Tech Specifications (About) -->
+            <div class="tech-specs">
+                <div class="panel-title" style="font-size: 0.7rem;">SYSTEM SPECIFICATIONS</div>
+                <div class="tech-item"><span>Language:</span><span>Python 3.13</span></div>
+                <div class="tech-item"><span>Framework:</span><span>Flask / Jinja2</span></div>
+                <div class="tech-item"><span>Vision Model:</span><span>YOLO-World v2</span></div>
+                <div class="tech-item"><span>Processing:</span><span>Tensor Processing</span></div>
+                <div class="tech-item"><span>UI Kit:</span><span>Custom Glassmorphism</span></div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const tagBox = document.getElementById('active-detections');
+        const modalTags = document.getElementById('modal-tags');
+        const logFeed = document.getElementById('log-feed');
+        let knownObjects = new Set();
+
+        function toggleModal() {
+            const modal = document.getElementById('settings-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'flex';
+                refreshDashboard();
+            }
+        }
+
+        function toggleAbout() {
+            const modal = document.getElementById('about-modal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        async function addClass() {
+            const input = document.getElementById('new-object');
+            const val = input.value;
+            if (!val) return;
+
+            const res = await fetch('/add_class', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({object: val})
+            });
+            const data = await res.json();
+            if (data.success) {
+                input.value = '';
+                alert(`System updated! Now detecting: ${val}`);
+                refreshDashboard();
+            }
+        }
+
+        async function refreshDashboard() {
+            try {
+                const res = await fetch('/detections');
+                const data = await res.json();
+                
+                // Update Sidebar Tags
+                tagBox.innerHTML = '';
+                data.active.forEach(obj => {
+                    const el = document.createElement('span');
+                    el.className = 'tag active';
+                    el.innerText = obj.toUpperCase();
+                    tagBox.appendChild(el);
+
+                    if (!knownObjects.has(obj)) {
+                        const log = document.createElement('div');
+                        log.className = 'log-entry';
+                        log.innerText = `> NEW_INTEL: [${obj.toUpperCase()}] DETECTED`;
+                        logFeed.prepend(log);
+                        knownObjects.add(obj);
+                    }
+                });
+
+                // Update Modal Vocabulary List
+                modalTags.innerHTML = '';
+                data.all_classes.forEach(cls => {
+                    const el = document.createElement('span');
+                    el.className = 'tag';
+                    el.innerText = cls;
+                    modalTags.appendChild(el);
+                });
+
+            } catch (e) {}
+        }
+
+        setInterval(refreshDashboard, 1000);
+    </script>
+</body>
+</html>
