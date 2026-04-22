@@ -1,0 +1,310 @@
+:root {
+    --primary: #00f2fe;
+    --accent: #ff007a;
+    --bg-dark: #020408;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --neon-blue: rgba(0, 242, 254, 0.8);
+    --text: #e0e6ed;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.05) 0%, transparent 100%),
+        linear-gradient(rgba(0, 242, 254, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 254, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 50px 50px, 50px 50px;
+}
+
+/* Loader Overlay */
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-dark);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.loader-content p {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--primary);
+    margin-top: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 242, 254, 0.1);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.progress-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.05);
+    margin-top: 15px;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 50%;
+    animation: loading 2s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Base App Shell */
+.app-container {
+    width: 98vw;
+    height: 96vh;
+    background: rgba(0, 5, 15, 0.85);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    backdrop-filter: blur(40px);
+    overflow: hidden;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 242, 254, 0.05);
+}
+
+header {
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.02);
+}
+
+.title-meta h1 {
+    font-size: 1.4rem;
+    letter-spacing: 6px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.title-meta p {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    margin-top: 4px;
+}
+
+.active-pulse {
+    width: 12px;
+    height: 12px;
+    background: var(--primary);
+    border-radius: 50%;
+    margin-right: 15px;
+    box-shadow: 0 0 15px var(--primary);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(0, 242, 254, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+}
+
+.system-metrics {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.metric .label {
+    font-size: 0.55rem;
+    opacity: 0.4;
+    letter-spacing: 1px;
+}
+
+.metric .value {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.metric.highlight .value {
+    color: #fff;
+    text-shadow: 0 0 10px var(--primary);
+}
+
+/* Tactical Deck Layout */
+.tactical-deck {
+    flex: 1;
+    position: relative;
+    display: flex;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+.glass-pane {
+    width: 280px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 10;
+}
+
+.panel-header {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--primary);
+    border-left: 3px solid var(--primary);
+    padding-left: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.telemetry-data {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #00ff00;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0.7;
+}
+
+.neural-layers {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.layer {
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+}
+
+.layer .fill {
+    height: 100%;
+    background: var(--primary);
+    box-shadow: 0 0 5px var(--primary);
+}
+
+.binary-stream {
+    font-size: 0.7rem;
+    line-height: 1.4;
+    word-break: break-all;
+    opacity: 0.3;
+    font-family: monospace;
+}
+
+.status-box {
+    padding: 10px;
+    background: rgba(0,242,254,0.05);
+    border: 1px dashed var(--glass-border);
+    font-size: 0.6rem;
+    border-radius: 8px;
+}
+
+/* Viewport Container */
+.viewport-container {
+    flex: 1;
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.output_canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: rotateY(180deg);
+}
+
+.ui-tactical-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.grid-lines {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+    background-size: 10% 10%;
+}
+
+.tactical-footer {
+    padding: 1rem 2.5rem;
+    background: rgba(0,0,0,0.5);
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-stats {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+.controls {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.control-key {
+    background: rgba(0,242,254,0.05);
+    border: 1px solid var(--glass-border);
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--primary);
+}

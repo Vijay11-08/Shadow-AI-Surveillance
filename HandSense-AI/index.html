@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HandSense AI | Interactive Neural Vision</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- MediaPipe Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>SYNCING_NEURAL_LAYERS...</p>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="active-pulse"></span>
+                <div class="title-meta">
+                    <h1>AEGIS NEURAL LINK</h1>
+                    <p>QUANTUM SECURE HAND_PROTOCOL v.4.2</p>
+                </div>
+            </div>
+            <div class="system-metrics">
+                <div class="metric">
+                    <span class="label">KERNEL_LATENCY</span>
+                    <span class="value" id="fps-counter">0</span>ms
+                </div>
+                <div class="metric">
+                    <span class="label">THREAT_LEVEL</span>
+                    <span class="value" id="threat-level">CLEAR</span>
+                </div>
+                <div class="metric highlight">
+                    <span class="label">GESTURE_STATE</span>
+                    <span class="value" id="gesture-label">INITIALIZING...</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="tactical-deck">
+            <!-- Glass Panes -->
+            <div class="glass-pane left-panel">
+                <div class="panel-header">NEURAL_TELEMETRY</div>
+                <div class="telemetry-data" id="telemetry-log">
+                    <span>> BOOT_SEQUENCE_COMPLETE</span>
+                    <span>> HAND_DETECTION_ENGINE_ONLINE</span>
+                    <span>> KERNEL_ACTIVE</span>
+                </div>
+                <div class="neural-layers">
+                    <div class="layer"><div class="fill" style="width: 85%"></div></div>
+                    <div class="layer"><div class="fill" style="width: 60%"></div></div>
+                    <div class="layer"><div class="fill" style="width: 92%"></div></div>
+                </div>
+            </div>
+
+            <div class="glass-pane right-panel">
+                <div class="panel-header">ENCRYPTION_KEY</div>
+                <div class="binary-stream" id="binary-stream">
+                    0101010101010101010
+                </div>
+                <div class="security-status">
+                    <div class="status-box">
+                        <span>SSL: ACTIVE</span>
+                        <span>BIT: 2048</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="viewport-container">
+                <video class="input_video" hidden></video>
+                <canvas class="output_canvas"></canvas>
+                
+                <div class="ui-tactical-overlay">
+                    <div class="grid-lines"></div>
+                    <div class="aim-bracket"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="tactical-footer">
+            <div class="footer-stats">
+                <span>SYSTEM_STABLE: [OK]</span>
+                <span>PACKET_INSPECTION: [ENABLE]</span>
+                <span>NEURAL_WEIGHTS: [LOADED]</span>
+            </div>
+            <div class="controls">
+                <div class="control-key"><span>🖐️</span> OPEN_HAND: RAINBOW_DECODE</div>
+                <div class="control-key"><span>👌</span> PINCH_STATE: ORB_ENCRYPTION</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modular Scripts -->
+    <script src="particles.js"></script>
+    <script src="hand_tracker.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
