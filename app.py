@@ -28,13 +28,10 @@ lock = threading.Lock()
 def capture_thread():
     global latest_frame
     print("[INFO] Opening Camera...")
-    # Cross-platform camera initialization
-    import sys
-    backend = cv2.CAP_DSHOW if sys.platform == "win32" else cv2.CAP_ANY
-    cap = cv2.VideoCapture(0, backend) 
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) 
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-    cap.set(cv2.CAP_PROP_FPS, 30)
+    cap.set(cv2.CAP_PROP_FPS, 90)
     
     while True:
         success, frame = cap.read()
@@ -88,15 +85,32 @@ def generate_frames():
             display_frame = latest_frame.copy()
             active_results = latest_results.copy()
 
+        # Dynamic Color Mapping
+        class_colors = {
+            "person": (255, 120, 0),    # Cyan/Blue-ish
+            "shield": (0, 255, 0),      # Green
+            "threat": (0, 0, 255),      # Red
+            "warning": (0, 255, 255)    # Yellow
+        }
+
         # Overlays
         for res in active_results:
             (x1, y1, x2, y2) = res['box']
-            color = (255, 120, 0) if res['name'] == "person" else (0, 200, 255)
+            name = res['name']
+            
+            # Generate a unique hash-based color if not predefined
+            if name not in class_colors:
+                # Use name hash to generate a consistent RGB color
+                h = hash(name)
+                color = ( (h & 0xFF), ((h >> 8) & 0xFF), ((h >> 16) & 0xFF) )
+            else:
+                color = class_colors[name]
+
             cv2.rectangle(display_frame, (x1, y1), (x2, y2), color, 2)
-            cv2.putText(display_frame, f"{res['name'].upper()}", (x1, y1-10), 
+            cv2.putText(display_frame, f"{name.upper()}", (x1, y1-10), 
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
 
-        ret, buffer = cv2.imencode('.jpg', display_frame, [cv2.IMWRITE_JPEG_QUALITY, 80])
+        ret, buffer = cv2.imencode('.jpg', display_frame, [cv2.IMWRITE_JPEG_QUALITY, 100])
         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
         time.sleep(0.03) # Cap stream at ~30 FPS to reduce bandwidth
 

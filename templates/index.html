@@ -308,6 +308,15 @@
             }
         }
 
+        function getObjectColor(name) {
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const c = (hash & 0x00FFFFFF).toString(16).toUpperCase();
+            return "#" + "00000".substring(0, 6 - c.length) + c;
+        }
+
         async function refreshDashboard() {
             try {
                 const res = await fetch('/detections');
@@ -319,11 +328,18 @@
                     const el = document.createElement('span');
                     el.className = 'tag active';
                     el.innerText = obj.toUpperCase();
+                    
+                    const color = getObjectColor(obj);
+                    el.style.borderColor = color;
+                    el.style.color = color;
+                    el.style.background = `${color}22`; // 22 is ~13% opacity
+                    
                     tagBox.appendChild(el);
 
                     if (!knownObjects.has(obj)) {
                         const log = document.createElement('div');
                         log.className = 'log-entry';
+                        log.style.color = color;
                         log.innerText = `> NEW_INTEL: [${obj.toUpperCase()}] DETECTED`;
                         logFeed.prepend(log);
                         knownObjects.add(obj);
@@ -335,8 +351,12 @@
                 data.all_classes.forEach(cls => {
                     const tagWrapper = document.createElement('div');
                     tagWrapper.className = 'tag-wrapper';
+                    
+                    const color = getObjectColor(cls);
+                    tagWrapper.style.borderColor = `${color}44`;
+
                     tagWrapper.innerHTML = `
-                        <span class="tag">${cls}</span>
+                        <span class="tag" style="color: ${color}">${cls}</span>
                         <span class="remove-btn" onclick="removeClass('${cls}')">&times;</span>
                     `;
                     modalTags.appendChild(tagWrapper);
@@ -351,6 +371,12 @@
                         el.className = 'tag';
                         el.style.fontSize = '0.7rem';
                         el.innerText = cls.toUpperCase();
+                        
+                        const color = getObjectColor(cls);
+                        el.style.borderColor = `${color}88`;
+                        el.style.color = color;
+                        el.style.background = `${color}11`;
+                        
                         infoVocab.appendChild(el);
                     });
                 }
