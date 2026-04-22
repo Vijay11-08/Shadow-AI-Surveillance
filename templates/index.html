@@ -10,74 +10,138 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- About/Documentation Modal -->
+    <!-- Notification Toast -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- Intelligence Portal (Info) -->
     <div id="about-modal" class="modal-overlay">
         <div class="about-modal-content">
             <div class="modal-header">
-                <h2 style="color: var(--primary); letter-spacing: 3px;">SYSTEM INTELLIGENCE OVERVIEW</h2>
+                <div>
+                    <h2 style="color: var(--primary); letter-spacing: 4px; font-weight: 800; text-transform: uppercase;">Aegis Intelligence Portal</h2>
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 5px;">System Diagnostic & Operational Documentation</p>
+                </div>
                 <span class="close-btn" onclick="toggleAbout()">&times;</span>
             </div>
             
-            <div class="about-section">
-                <h2>🛰️ Neural Architecture</h2>
-                <ul style="color: var(--text-dim); line-height: 1.8; font-size: 0.9rem; padding-left: 20px;">
-                    <li><strong>Engine:</strong> YOLO-World v2 (Semantic Neural Network).</li>
-                    <li><strong>Capability:</strong> Zero-shot detection using natural language prompts.</li>
-                    <li><strong>Optimization:</strong> Tensor-quantized weights for high-speed inference.</li>
-                </ul>
+            <div class="intelligence-grid">
+                <div class="intel-card">
+                    <div class="intel-header">
+                        <span class="intel-icon">🧠</span>
+                        <h3>Neural Core</h3>
+                    </div>
+                    <ul class="intel-list">
+                        <li><strong>Model:</strong> YOLO-World v2 (latest)</li>
+                        <li><strong>Architecture:</strong> Zero-shot Open-Vocabulary CNN</li>
+                        <li><strong>Engine:</strong> Tensor-stream processing</li>
+                        <li><strong>Capability:</strong> Real-time semantic mapping</li>
+                    </ul>
+                </div>
+
+                <div class="intel-card">
+                    <div class="intel-header">
+                        <span class="intel-icon">⚡</span>
+                        <h3>Execution Pipeline</h3>
+                    </div>
+                    <ul class="intel-list">
+                        <li><strong>Capture:</strong> Low-latency 640x480 RAW stream</li>
+                        <li><strong>Processing:</strong> Multi-threaded decoupled inference</li>
+                        <li><strong>Feedback:</strong> < 15ms frame-to-logic latency</li>
+                        <li><strong>Stability:</strong> Auto-recovery camera handshake</li>
+                    </ul>
+                </div>
+
+                <div class="intel-card">
+                    <div class="intel-header">
+                        <span class="intel-icon">🛰️</span>
+                        <h3>Detection Protocols</h3>
+                    </div>
+                    <ul class="intel-list">
+                        <li><strong>Injection:</strong> Dynamic runtime class mutation</li>
+                        <li><strong>Filter:</strong> Confidence thresholding @ 0.25 min</li>
+                        <li><strong>NMS:</strong> Non-maximum suppression enabled</li>
+                        <li><strong>Logging:</strong> AES encrypted history capture</li>
+                    </ul>
+                </div>
+
+                <div class="intel-card">
+                    <div class="intel-header">
+                        <span class="intel-icon">🛡️</span>
+                        <h3>System Security</h3>
+                    </div>
+                    <ul class="intel-list">
+                        <li><strong>Access:</strong> Localhost sandboxed environment</li>
+                        <li><strong>Logs:</strong> Continuous CSV audit trail</li>
+                        <li><strong>ID:</strong> Unique session token identification</li>
+                        <li><strong>Build:</strong> v2.1 Tactical Edition</li>
+                    </ul>
+                </div>
+
+                <div class="intel-card" style="grid-column: span 2;">
+                    <div class="intel-header">
+                        <span class="intel-icon">🐧</span>
+                        <h3>Linux Operational Deployment</h3>
+                    </div>
+                    <ul class="intel-list">
+                        <li><strong>Initialization:</strong> Run the provided <code>setup_linux.sh</code> to install system dependencies.</li>
+                        <li><strong>Dependencies:</strong> Requires <code>libgl1</code> and <code>libglib2.0</code> for OpenCV processing.</li>
+                        <li><strong>Permissions:</strong> Ensure user is in the <code>video</code> group: <code>sudo usermod -a -G video $USER</code>.</li>
+                        <li><strong>Execution:</strong> Use <code>python3 app.py</code> to launch the tactical engine.</li>
+                        <li><strong>Environment:</strong> Works best on Ubuntu/Debian based distributions.</li>
+                    </ul>
+                </div>
+
+                <div class="intel-card" style="grid-column: span 2;">
+                    <div class="intel-header">
+                        <span class="intel-icon">🔍</span>
+                        <h3>Detection Scope (Live Vocabulary)</h3>
+                    </div>
+                    <div id="info-vocabulary" class="tag-box" style="margin-top: 10px;">
+                        <!-- Dynamically filled -->
+                    </div>
+                    <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
+                        The system is currently configured to track the objects listed above. You can bridge new concepts via the <strong style="color: var(--primary);">Settings Panel</strong>.
+                    </p>
+                </div>
             </div>
 
-            <div class="about-section">
-                <h2>⚡ High-Performance Processing</h2>
-                <ul style="color: var(--text-dim); line-height: 1.8; font-size: 0.9rem; padding-left: 20px;">
-                    <li><strong>Asynchronous Threading:</strong> Decoupled Camera Capture and AI Inference threads for 0-lag movement.</li>
-                    <li><strong>Auto-Recovery:</strong> Intelligent camera handshake and hardware auto-restart protocols.</li>
-                    <li><strong>Frame Interpolation:</strong> 30+ FPS smooth-stream vision technology.</li>
-                </ul>
+            <div class="dev-footer">
+                <div class="dev-info">
+                    <p class="dev-name">ENGINEERING LEAD: VIJAY OTARADI</p>
+                    <p class="dev-role">System Architect & AI Researcher</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Vijay11-08" target="_blank">GITHUB_PORTFOLIO</a>
+                </div>
             </div>
-
-            <div class="about-section">
-                <h2>🛠️ Dynamic Control & Data</h2>
-                <ul style="color: var(--text-dim); line-height: 1.8; font-size: 0.9rem; padding-left: 20px;">
-                    <li><strong>On-the-Fly Learning:</strong> Add any custom object (e.g., "glasses", "id card") instantly via Settings.</li>
-                    <li><strong>Intelligence Logs:</strong> Real-time scrolling detection feed with encrypted history.</li>
-                    <li><strong>Data Export:</strong> Professional CSV report generation for laboratory or security auditing.</li>
-                </ul>
-            </div>
-
-            <div class="about-section">
-                <h2>📺 Human Interface (UI)</h2>
-                <ul style="color: var(--text-dim); line-height: 1.8; font-size: 0.9rem; padding-left: 20px;">
-                    <li><strong>Glassmorphism:</strong> Premium dark-mode UI with high-transparency panels.</li>
-                    <li><strong>Tactical Overlay:</strong> HUD-style corner brackets and live vision scanlines.</li>
-                    <li><strong>Responsive Layout:</strong> Fully optimized for multi-device monitoring hubs.</li>
-                </ul>
-            </div>
-            
-            <p style="text-align: center; margin-top: 2rem; opacity: 0.5; font-size: 0.75rem;">Developed by Vijay Otaradi | GitHub: @Vijay11-08</p>
         </div>
     </div>
 
     <!-- Settings Modal -->
     <div id="settings-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>COMMAND SETTINGS</h2>
+        <div class="modal-content" style="max-width: 500px; padding: 2.5rem; border: 1px solid var(--primary);">
+            <div class="modal-header" style="margin-bottom: 1.5rem;">
+                <h2 style="letter-spacing: 2px; font-size: 1.2rem; color: var(--primary);">AI COMMAND SETTINGS</h2>
                 <span class="close-btn" onclick="toggleModal()">&times;</span>
             </div>
             
-            <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1rem;">
-                Add new objects to the AI logic using Open-Vocabulary.
+            <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; line-height: 1.5;">
+                Enter a specific object name to inject into the neural vocabulary. The AI will immediately begin searching for this target.
             </p>
 
-            <div class="input-group">
-                <input type="text" id="new-object" placeholder="e.g. coffee mug, red car, helmet...">
-                <button class="btn-add" onclick="addClass()">ADD</button>
+            <div class="input-group" style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 12px; display: flex; gap: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                <input type="text" id="new-object" placeholder="e.g. coffee mug, laptop, person..." style="flex: 1; background: transparent; border: none; color: #fff; outline: none; padding: 5px 10px; font-family: inherit;">
+                <button class="btn-add" onclick="addClass()" style="background: var(--primary); color: #000; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.75rem;">INJECT CLASS</button>
             </div>
 
-            <div class="panel-title">Active AI Vocabulary</div>
-            <div id="modal-tags" class="tag-box" style="margin-top: 10px;">
-                <!-- Dynamically filled -->
+            <div style="margin-top: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span class="panel-title" style="margin: 0; font-size: 0.7rem; color: var(--primary);">ACTIVE AI VOCABULARY</span>
+                    <span style="font-size: 0.6rem; opacity: 0.5;">LIVE MONITORING</span>
+                </div>
+                <div id="modal-tags" class="tag-box" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; min-height: 100px;">
+                    <!-- Dynamically filled -->
+                </div>
             </div>
         </div>
     </div>
@@ -132,13 +196,17 @@
                 </div>
             </div>
 
-            <!-- New Professional Footer -->
-            <footer style="margin-top: 2rem; padding: 1.5rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; opacity: 0.8;">
-                <div>SYSTEM_VERSION: 2.1.0_PRO</div>
-                <div style="font-weight: 600; letter-spacing: 1px;">
-                    MADE WITH ❤️ BY <a href="https://github.com/Vijay11-08" target="_blank" style="color: var(--primary); text-decoration: none; border-bottom: 1px solid var(--primary);">VIJAY OTARDI</a>
+            <!-- Professional Tactical Footer -->
+            <footer style="margin-top: 2rem; padding: 1.5rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; letter-spacing: 1px; color: var(--text-dim);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="pulse-dot" style="width: 6px; height: 6px;"></span>
+                    <span>ENGINE_v2.1 // SYSTEM_SECURED</span>
                 </div>
-                <div>SEC_LOG_ENCRYPTED: YES</div>
+                <div style="font-weight: 800; color: #fff;">
+                    <span style="opacity: 0.5;">DEVELOPED BY</span> 
+                    <a href="https://github.com/Vijay11-08" target="_blank" style="color: var(--primary); text-decoration: none; margin-left: 5px; text-shadow: 0 0 10px var(--primary);">VIJAY OTARDI (@Vijay11-08)</a>
+                </div>
+                <div style="opacity: 0.4;">&copy; 2026 AEGIS VISION AI</div>
             </footer>
         </main>
 
@@ -174,6 +242,24 @@
         const logFeed = document.getElementById('log-feed');
         let knownObjects = new Set();
 
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('notification-container');
+            const toast = document.createElement('div');
+            toast.className = `toast-card ${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <span class="toast-icon">${type === 'success' ? '✅' : '🔴'}</span>
+                    <span class="toast-msg">${message}</span>
+                </div>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
         function toggleModal() {
             const modal = document.getElementById('settings-modal');
             if (modal.style.display === 'flex') {
@@ -191,7 +277,7 @@
 
         async function addClass() {
             const input = document.getElementById('new-object');
-            const val = input.value;
+            const val = input.value.trim();
             if (!val) return;
 
             const res = await fetch('/add_class', {
@@ -202,7 +288,22 @@
             const data = await res.json();
             if (data.success) {
                 input.value = '';
-                alert(`System updated! Now detecting: ${val}`);
+                showToast(`SUCCESS: [${val.toUpperCase()}] INJECTED`);
+                refreshDashboard();
+            } else {
+                showToast(`ERROR: ${data.error.toUpperCase()}`, 'error');
+            }
+        }
+
+        async function removeClass(obj) {
+            const res = await fetch('/remove_class', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({object: obj})
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`WARNING: [${obj.toUpperCase()}] PURGED`, 'error');
                 refreshDashboard();
             }
         }
@@ -232,11 +333,27 @@
                 // Update Modal Vocabulary List
                 modalTags.innerHTML = '';
                 data.all_classes.forEach(cls => {
-                    const el = document.createElement('span');
-                    el.className = 'tag';
-                    el.innerText = cls;
-                    modalTags.appendChild(el);
+                    const tagWrapper = document.createElement('div');
+                    tagWrapper.className = 'tag-wrapper';
+                    tagWrapper.innerHTML = `
+                        <span class="tag">${cls}</span>
+                        <span class="remove-btn" onclick="removeClass('${cls}')">&times;</span>
+                    `;
+                    modalTags.appendChild(tagWrapper);
                 });
+
+                // Update Info Modal Vocabulary List
+                const infoVocab = document.getElementById('info-vocabulary');
+                if (infoVocab) {
+                    infoVocab.innerHTML = '';
+                    data.all_classes.forEach(cls => {
+                        const el = document.createElement('span');
+                        el.className = 'tag';
+                        el.style.fontSize = '0.7rem';
+                        el.innerText = cls.toUpperCase();
+                        infoVocab.appendChild(el);
+                    });
+                }
 
             } catch (e) {}
         }

@@ -14,7 +14,7 @@ app = Flask(__name__)
 print("[INFO] Preparing AI...")
 MODEL_NAME = 'yolov8s-worldv2.pt'
 model = YOLO(MODEL_NAME)
-classes = ["person", "glasses", "cell phone", "laptop", "keyboard", "mouse", "chair", "pen"]
+classes = ["person", "glasses", "cell phone", "laptop", "keyboard", "mouse", "chair", "pen", "book", "backpack", "bottle"]
 model.set_classes(classes)
 
 # Shared State
@@ -28,9 +28,13 @@ lock = threading.Lock()
 def capture_thread():
     global latest_frame
     print("[INFO] Opening Camera...")
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # Use DSHOW for Windows stability
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    # Cross-platform camera initialization
+    import sys
+    backend = cv2.CAP_DSHOW if sys.platform == "win32" else cv2.CAP_ANY
+    cap = cv2.VideoCapture(0, backend) 
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    cap.set(cv2.CAP_PROP_FPS, 30)
     
     while True:
         success, frame = cap.read()
@@ -52,8 +56,8 @@ def inference_thread():
             with lock:
                 frame_to_process = latest_frame.copy()
             
-            # Predict
-            results = model.predict(frame_to_process, conf=0.25, imgsz=256, verbose=False)
+            # Predict with higher resolution and optimized confidence for smaller objects
+            results = model.predict(frame_to_process, conf=0.20, imgsz=640, verbose=False)
             
             new_boxes = []
             new_names = []
@@ -108,6 +112,28 @@ def video_feed(): return Response(generate_frames(), mimetype='multipart/x-mixed
 
 @app.route('/detections')
 def get_detections(): return jsonify({"active": current_detections, "all_classes": classes})
+
+@app.route('/add_class', methods=['POST'])
+def add_class():
+    global classes
+    data = request.json
+    new_obj = data.get('object', '').lower().strip()
+    if new_obj and new_obj not in classes:
+        classes.append(new_obj)
+        model.set_classes(classes)
+        return jsonify({"success": True, "classes": classes})
+    return jsonify({"success": False, "error": "Invalid or duplicate object"})
+
+@app.route('/remove_class', methods=['POST'])
+def remove_class():
+    global classes
+    data = request.json
+    obj_to_remove = data.get('object', '').lower().strip()
+    if obj_to_remove in classes:
+        classes.remove(obj_to_remove)
+        model.set_classes(classes)
+        return jsonify({"success": True, "classes": classes})
+    return jsonify({"success": False, "error": "Object not found"})
 
 @app.route('/download_logs')
 def download_logs():

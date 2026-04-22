@@ -1,9 +1,9 @@
 # 🛡️ Aegis Tactical Vision 
 
+[![Author](https://img.shields.io/badge/Developer-Vijay_Otaradi-orange?style=for-the-badge&logo=github)](https://github.com/Vijay11-08)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.0+-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![YOLOv8](https://img.shields.io/badge/YOLO-v8-00FFAA?style=for-the-badge&logo=ultralytics&logoColor=black)](https://ultralytics.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 **Aegis Tactical Vision** is a high-performance, real-time object detection dashboard built for professional-grade surveillance and intelligence gathering. Leveraging the power of **YOLOv8 World v2**, this platform provides a sub-millisecond response for identifying objects in diverse environments with a sleek, glassmorphic UI.
 
@@ -49,7 +49,7 @@ Ensure you have Python 3.9+ installed and a working webcam.
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/Aegis-Tactical-Vision.git
+git clone https://github.com/Vijay11-08/Aegis-Tactical-Vision.git
 cd Aegis-Tactical-Vision
 
 # Install dependencies
@@ -87,8 +87,11 @@ This system processes all data **locally**. No video feeds or detection logs are
 
 ---
 
-## 👨‍💻 Contributing
-We welcome contributions to enhance the tactical capabilities of Aegis. Please feel free to fork the repo and submit PRs!
+## 👨‍💻 Lead Developer
+
+| Name | GitHub | Portfolio |
+| :--- | :--- | :--- |
+| **Vijay Otaradi** | [@Vijay11-08](https://github.com/Vijay11-08) | [View Profile](https://github.com/Vijay11-08) |
 
 ---
 *Created with ❤️ by [Vijay Otaradi](https://github.com/Vijay11-08)*
